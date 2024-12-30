@@ -5,6 +5,18 @@ const cors = require('cors');
 // crear el servidor
 const app = express();
 
+// Conectar swagger
+//imports
+const YAML = require('yamljs');
+const swaggerUi = require('swagger-ui-express');
+
+//cargar archivo
+const swaggerDocument = YAML.load('./swagger.yaml');
+
+// Configurar Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 // Conectar a la base de datos
 conectarDB();
 
@@ -34,4 +46,5 @@ app.use('/api/tareas', require('./router/tareas'));
 //arrancar la app
 app.listen(port, '0.0.0.0', () => {
     console.log(`El servidor esta funcionando en el puerto ${port}`);
-})
+
+});

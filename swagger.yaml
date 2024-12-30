@@ -1,0 +1,217 @@
+openapi: 3.0.0
+info:
+  title: MERNTASKS API
+  description: API para gestionar proyectos y tareas.
+  version: 1.0.0
+servers:
+  - url: "{{URL}}"
+    description: Servidor base
+paths:
+  /api/proyectos:
+    post:
+      summary: Crear proyecto
+      tags:
+        - Proyectos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: Proyecto MERNTasks
+      responses:
+        '200':
+          description: Proyecto creado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+    get:
+      summary: Obtener proyectos
+      tags:
+        - Proyectos
+      responses:
+        '200':
+          description: Lista de proyectos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    nombre:
+                      type: string
+  /api/proyectos/{proyecto}:
+    put:
+      summary: Actualizar proyecto
+      tags:
+        - Proyectos
+      parameters:
+        - name: proyecto
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: Backend con Node js
+      responses:
+        '200':
+          description: Proyecto actualizado.
+    delete:
+      summary: Eliminar proyecto
+      tags:
+        - Proyectos
+      parameters:
+        - name: proyecto
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Proyecto eliminado.
+  /api/tareas:
+    post:
+      summary: Crear tarea
+      tags:
+        - Tareas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: Implementacion
+                proyecto:
+                  type: string
+      responses:
+        '200':
+          description: Tarea creada correctamente.
+    get:
+      summary: Obtener tareas
+      tags:
+        - Tareas
+      parameters:
+        - name: proyecto
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de tareas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    nombre:
+                      type: string
+                    estado:
+                      type: boolean
+  /api/tareas/{tarea}:
+    put:
+      summary: Actualizar tarea
+      tags:
+        - Tareas
+      parameters:
+        - name: tarea
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: boolean
+                  example: true
+                proyecto:
+                  type: string
+      responses:
+        '200':
+          description: Tarea actualizada.
+    delete:
+      summary: Eliminar tarea
+      tags:
+        - Tareas
+      parameters:
+        - name: tarea
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tarea eliminada.
+  /api/usuarios:
+    post:
+      summary: Crear usuario
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: Damian
+                email:
+                  type: string
+                  example: correo@correo.com
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Usuario creado correctamente.
+  /api/usuarios/login:
+    post:
+      summary: Autenticar usuario
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: correo@correo.com
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Usuario autenticado correctamente.
