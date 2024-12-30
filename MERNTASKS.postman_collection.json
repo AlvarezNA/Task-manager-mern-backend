@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "323102b8-aea9-4887-8922-ba02e97dd7ae",
+		"name": "MERNTASKS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Proyectos",
+			"item": [
+				{
+					"name": "Crear proyecto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let resp = pm.response.json();\r",
+									"console.log(resp._id);\r",
+									"if(resp._id){\r",
+									"    let proyectoId=resp._id;\r",
+									"    // actualizamos token\r",
+									"\tpm.globals.set(\"proyecto\",proyectoId);\r",
+									"\tconsole.log('se ha actualizado el proyecto');\r",
+									"}else{\r",
+									"\tconsole.log('no se ha actualizado el proyecto');\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Proyecto MERNTasks\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/proyectos",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"proyectos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar proyecto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/proyectos/{{proyecto}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"proyectos",
+								"{{proyecto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar proyecto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nombre\":\"Backend con Node js\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/proyectos/{{proyecto}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"proyectos",
+								"{{proyecto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener proyectos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/proyectos",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"proyectos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tareas",
+			"item": [
+				{
+					"name": "Crear tarea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let resp = pm.response.json();\r",
+									"console.log(resp.tarea._id);\r",
+									"if(resp.tarea._id){\r",
+									"    let tareaId=resp.tarea._id;\r",
+									"    // actualizamos token\r",
+									"\tpm.globals.set(\"tarea\",tareaId);\r",
+									"\tconsole.log('se ha actualizado el tarea');\r",
+									"}else{\r",
+									"\tconsole.log('no se ha actualizado el tarea');\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Implementacion\",\r\n    \"proyecto\":\"{{proyecto}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/tareas",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener tareas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"proyecto\":\"{{proyecto}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/tareas",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar tarea",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estado\":\"true\",\r\n    \"proyecto\":\"{{proyecto}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/tareas/{{tarea}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"{{tarea}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar tarea",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"proyecto\":\"{{proyecto}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/tareas/{{tarea}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"{{tarea}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crear usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"postman.clearEnvironmentVariable(\"token\");\r",
+							"\r",
+							"var resp = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", resp.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"Damian\",\r\n    \"email\":\"correo@correo.com\",\r\n    \"password\":\"123456\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/api/usuarios",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Autenticar usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"postman.clearEnvironmentVariable(\"token\");\r",
+							"\r",
+							"var resp = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", resp.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"correo@correo.com\",\r\n    \"password\":\"123456\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/api/auth",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
